@@ -4,7 +4,10 @@ const errorHandler = ((err, _, res, next) => {
   const statusCode = err.statusCode || 500;
 
   const message = statusCode === ERROR_INTERNAL_SERVER ? 'Ошибка на сервере!' : err.message;
-  res.status(statusCode).send({ message });
+  res.status(statusCode).send({
+    message,
+    detail: err.message
+  });
   next();
 });
 
